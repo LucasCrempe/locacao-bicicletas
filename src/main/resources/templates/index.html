@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{app.title}"></title>
+</head>
+<body>
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: sidebar}"></div>
+    <main>
+        <form th:action="@{/}" method="get">
+            <input type="text" name="cidade" th:placeholder="#{app.city}">
+            <button type="submit" th:text="#{app.search}"></button>
+        </form>
+        <table border="1">
+            <tr>
+                <th>Nome</th>
+                <th th:text="#{app.city}"></th>
+            </tr>
+            <tr th:each="locadora : ${locadoras}">
+                <td th:text="${locadora.nome}"></td>
+                <td th:text="${locadora.cidade}"></td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

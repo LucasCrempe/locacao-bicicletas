@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Locação</title>
+</head>
+<body>
+    <div th:replace="~{layout :: header}"></div>
+    <div th:replace="~{layout :: sidebar}"></div>
+    <main>
+        <h2>Nova Locação</h2>
+        <div th:if="${erro}" th:text="${erro}" style="color:red;"></div>
+        <form th:action="@{/cliente/locacoes/salvar}" th:object="${locacao}" method="post">
+            <select th:field="*{locadora}" required>
+                <option th:each="l : ${locadoras}" th:value="${l.id}" th:text="${l.nome}"></option>
+            </select>
+            <input type="datetime-local" th:field="*{dataHora}" step="3600" required>
+            <button type="submit" th:text="#{app.save}"></button>
+        </form>
+    </main>
+</body>
+</html>

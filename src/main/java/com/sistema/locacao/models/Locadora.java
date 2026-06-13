@@ -1,86 +1,30 @@
 package com.sistema.locacao.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 @Table(name = "locadoras")
-public class Locadora {
+public class Locadora extends Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String senha;
-
+    @CNPJ
+    @NotBlank
     @Column(nullable = false, unique = true, length = 18)
     private String cnpj;
 
+    @NotBlank
     @Column(nullable = false)
     private String nome;
 
+    @NotBlank
     @Column(nullable = false)
     private String cidade;
 
-    public Locadora() {
-    }
-
-    public Locadora(String email, String senha, String cnpj, String nome, String cidade) {
-        this.email = email;
-        this.senha = senha;
-        this.cnpj = cnpj;
-        this.nome = nome;
-        this.cidade = cidade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+    public String getCnpj() { return cnpj; }
+    public void setCnpj(String cnpj) { this.cnpj = cnpj; }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public String getCidade() { return cidade; }
+    public void setCidade(String cidade) { this.cidade = cidade; }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{app.title}">Sistema</title>
+</head>
+<body>
+    <div th:fragment="header">
+        <h1 th:text="#{app.title}"></h1>
+        <a href="?lang=pt">PT</a> | <a href="?lang=en">EN</a>
+        <div sec:authorize="isAuthenticated()">
+            <span th:text="#{app.welcome}"></span> <span sec:authentication="name"></span>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" th:text="#{app.logout}"></button>
+            </form>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}" th:text="#{app.login}"></a>
+        </div>
+    </div>
+    
+    <div th:fragment="sidebar">
+        <ul>
+            <li><a th:href="@{/}" th:text="#{app.locadoras}"></a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/clientes}" th:text="#{app.clients}"></a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/locadoras}" th:text="#{app.locadoras}"></a></li>
+            <li sec:authorize="hasRole('CLIENTE')"><a th:href="@{/cliente/locacoes}" th:text="#{app.rentals}"></a></li>
+            <li sec:authorize="hasRole('LOCADORA')"><a th:href="@{/locadora/locacoes}" th:text="#{app.rentals}"></a></li>
+        </ul>
+    </div>
+</body>
+</html>

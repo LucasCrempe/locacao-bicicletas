@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Erro</title>
+</head>
+<body>
+    <div th:replace="~{layout :: header}"></div>
+    <h2>Ops! Ocorreu um problema.</h2>
+    <p>Por favor, tente novamente.</p>
+    <a th:href="@{/}">Voltar ao início</a>
+</body>
+</html>
