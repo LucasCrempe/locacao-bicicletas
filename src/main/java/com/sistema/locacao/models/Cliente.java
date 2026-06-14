@@ -3,8 +3,8 @@ package com.sistema.locacao.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Entity
@@ -29,6 +29,7 @@ public class Cliente extends Usuario {
     private String sexo;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 

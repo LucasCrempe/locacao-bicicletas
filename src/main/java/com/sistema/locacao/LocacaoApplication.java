@@ -16,12 +16,12 @@ public class LocacaoApplication {
     }
 
     @Bean
-    public CommandLineRunner initData(UsuarioRepository usuarioRepository, BCryptPasswordEncoder encoder) {
+    public CommandLineRunner initData(UsuarioRepository usuarioRepository) {
         return args -> {
             if (usuarioRepository.findByEmail("admin@admin.com") == null) {
                 Usuario admin = new Usuario();
                 admin.setEmail("admin@admin.com");
-                admin.setSenha(encoder.encode("admin"));
+                admin.setSenha(new BCryptPasswordEncoder().encode("admin"));
                 admin.setPapel("ROLE_ADMIN");
                 usuarioRepository.save(admin);
             }

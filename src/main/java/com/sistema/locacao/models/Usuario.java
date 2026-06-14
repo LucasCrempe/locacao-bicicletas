@@ -20,7 +20,6 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @NotBlank
     @Column(nullable = false)
     private String papel;
 

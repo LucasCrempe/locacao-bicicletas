@@ -2,6 +2,7 @@ package com.sistema.locacao.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +24,7 @@ public class Locacao {
     private Locadora locadora;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 

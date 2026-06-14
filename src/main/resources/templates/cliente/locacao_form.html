@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Nova Locação</title>
-</head>
+<head th:replace="~{layout :: head(titulo='Nova Locação')}"></head>
 <body>
-    <div th:replace="~{layout :: header}"></div>
-    <div th:replace="~{layout :: sidebar}"></div>
-    <main>
-        <h2>Nova Locação</h2>
-        <div th:if="${erro}" th:text="${erro}" style="color:red;"></div>
-        <form th:action="@{/cliente/locacoes/salvar}" th:object="${locacao}" method="post">
-            <select th:field="*{locadora}" required>
-                <option th:each="l : ${locadoras}" th:value="${l.id}" th:text="${l.nome}"></option>
-            </select>
-            <input type="datetime-local" th:field="*{dataHora}" step="3600" required>
-            <button type="submit" th:text="#{app.save}"></button>
-        </form>
-    </main>
+    <div class="d-flex flex-row">
+        <div th:replace="~{layout :: sidebar}"></div>
+        <div class="w-100 d-flex flex-column">
+            <div th:replace="~{layout :: header}"></div>
+            
+            <div class="container mt-4" style="max-width: 500px;">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Nova Locação</h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+                        
+                        <form th:action="@{/cliente/locacoes/salvar}" th:object="${locacao}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Locadora</label>
+                                <select th:field="*{locadora}" class="form-select" required>
+                                    <option value="">Selecione a Locadora</option>
+                                    <option th:each="l : ${locadoras}" th:value="${l.id}" th:text="${l.nome} + ' - ' + ${l.cidade}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Data e Hora (Duração fixa: 1h)</label>
+                                <input type="datetime-local" th:field="*{dataHora}" class="form-control" step="3600" required>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a th:href="@{/cliente/locacoes}" class="btn btn-secondary me-2">Cancelar</a>
+                                <button type="submit" class="btn btn-primary" th:text="#{app.save}">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

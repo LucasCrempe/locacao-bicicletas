@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(titulo=#{app.clients})}"></head>
+<body>
+    <div class="d-flex flex-row">
+        <div th:replace="~{layout :: sidebar}"></div>
+        <div class="w-100 d-flex flex-column">
+            <div th:replace="~{layout :: header}"></div>
+            
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 th:text="#{app.clients}">Clientes</h2>
+                    <a th:href="@{/admin/clientes/novo}" class="btn btn-success">+ Novo Cliente</a>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(clientes)}">
+                        <thead class="table-dark">
+                            <tr>
+                                <th th:text="#{app.name}">Nome</th>
+                                <th>CPF</th>
+                                <th th:text="#{app.email}">E-mail</th>
+                                <th>Telefone</th>
+                                <th th:text="#{app.actions}">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="cliente : ${clientes}">
+                                <td th:text="${cliente.nome}"></td>
+                                <td th:text="${cliente.cpf}"></td>
+                                <td th:text="${cliente.email}"></td>
+                                <td th:text="${cliente.telefone}"></td>
+                                <td>
+                                    <a th:href="@{/admin/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-sm btn-primary" th:text="#{app.edit}">Editar</a>
+                                    <a th:href="@{/admin/clientes/excluir/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div th:if="${#lists.isEmpty(clientes)}" class="alert alert-warning">Nenhum cliente cadastrado.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

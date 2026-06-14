@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(titulo='Minhas Locações')}"></head>
+<body>
+    <div class="d-flex flex-row">
+        <div th:replace="~{layout :: sidebar}"></div>
+        <div class="w-100 d-flex flex-column">
+            <div th:replace="~{layout :: header}"></div>
+            
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 th:text="#{app.rentals}"></h2>
+                    <a th:href="@{/cliente/locacoes/nova}" class="btn btn-primary">+ Agendar Locação</a>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(locacoes)}">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Data/Hora</th>
+                                <th>Locadora</th>
+                                <th th:text="#{app.city}">Cidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="loc : ${locacoes}">
+                                <td th:text="${#temporals.format(loc.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
+                                <td th:text="${loc.locadora.nome}"></td>
+                                <td th:text="${loc.locadora.cidade}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div th:if="${#lists.isEmpty(locacoes)}" class="alert alert-secondary">Você ainda não possui locações.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
