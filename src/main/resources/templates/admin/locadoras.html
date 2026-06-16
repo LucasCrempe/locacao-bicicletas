@@ -10,7 +10,7 @@
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 th:text="#{app.locadoras}">Locadoras</h2>
-                    <a th:href="@{/admin/locadoras/nova}" class="btn btn-success">+ Nova Locadora</a>
+                    <a th:href="@{/admin/locadoras/nova}" class="btn btn-success" th:text="#{app.new.locadora}">+ Nova Locadora</a>
                 </div>
                 
                 <div class="table-responsive">
@@ -18,7 +18,7 @@
                         <thead class="table-dark">
                             <tr>
                                 <th th:text="#{app.name}">Nome</th>
-                                <th>CNPJ</th>
+                                <th th:text="#{app.cnpj}">CNPJ</th>
                                 <th th:text="#{app.email}">E-mail</th>
                                 <th th:text="#{app.city}">Cidade</th>
                                 <th th:text="#{app.actions}">Ações</th>
@@ -32,12 +32,12 @@
                                 <td th:text="${locadora.cidade}"></td>
                                 <td>
                                     <a th:href="@{/admin/locadoras/editar/{id}(id=${locadora.id})}" class="btn btn-sm btn-primary" th:text="#{app.edit}">Editar</a>
-                                    <a th:href="@{/admin/locadoras/excluir/{id}(id=${locadora.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                                    <a th:href="@{/admin/locadoras/excluir/{id}(id=${locadora.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" th:data-confirm="#{app.confirm.delete}" onclick="return confirm(this.getAttribute('data-confirm'));">Excluir</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div th:if="${#lists.isEmpty(locadoras)}" class="alert alert-warning">Nenhuma locadora cadastrada ainda.</div>
+                    <div th:if="${#lists.isEmpty(locadoras)}" class="alert alert-warning" th:text="#{app.empty.locadoras}"></div>
                 </div>
             </div>
         </div>

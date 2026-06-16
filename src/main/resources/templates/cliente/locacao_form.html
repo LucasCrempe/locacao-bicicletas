@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout :: head(titulo='Nova Locação')}"></head>
+<head th:replace="~{layout :: head(titulo=#{app.form.rental})}"></head>
 <body>
     <div class="d-flex flex-row">
         <div th:replace="~{layout :: sidebar}"></div>
@@ -10,26 +10,26 @@
             <div class="container mt-4" style="max-width: 500px;">
                 <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Nova Locação</h4>
+                        <h4 class="mb-0" th:text="#{app.new.rental}"></h4>
                     </div>
                     <div class="card-body">
                         <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
                         
                         <form th:action="@{/cliente/locacoes/salvar}" th:object="${locacao}" method="post">
                             <div class="mb-3">
-                                <label class="form-label">Locadora</label>
+                                <label class="form-label" th:text="#{app.locadoras}"></label>
                                 <select th:field="*{locadora}" class="form-select" required>
-                                    <option value="">Selecione a Locadora</option>
+                                    <option value="" th:text="#{app.gender.select}"></option>
                                     <option th:each="l : ${locadoras}" th:value="${l.id}" th:text="${l.nome} + ' - ' + ${l.cidade}"></option>
                                 </select>
                             </div>
                             <div class="mb-4">
-                                <label class="form-label">Data e Hora (Duração fixa: 1h)</label>
+                                <label class="form-label" th:text="#{app.datetime}"></label>
                                 <input type="datetime-local" th:field="*{dataHora}" class="form-control" step="3600" required>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a th:href="@{/cliente/locacoes}" class="btn btn-secondary me-2">Cancelar</a>
-                                <button type="submit" class="btn btn-primary" th:text="#{app.save}">Salvar</button>
+                                <a th:href="@{/cliente/locacoes}" class="btn btn-secondary me-2" th:text="#{app.cancel}"></a>
+                                <button type="submit" class="btn btn-primary" th:text="#{app.save}"></button>
                             </div>
                         </form>
                     </div>

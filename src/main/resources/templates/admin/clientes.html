@@ -10,7 +10,7 @@
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 th:text="#{app.clients}">Clientes</h2>
-                    <a th:href="@{/admin/clientes/novo}" class="btn btn-success">+ Novo Cliente</a>
+                    <a th:href="@{/admin/clientes/novo}" class="btn btn-success" th:text="#{app.new.client}">+ Novo Cliente</a>
                 </div>
                 
                 <div class="table-responsive">
@@ -18,9 +18,9 @@
                         <thead class="table-dark">
                             <tr>
                                 <th th:text="#{app.name}">Nome</th>
-                                <th>CPF</th>
+                                <th th:text="#{app.cpf}">CPF</th>
                                 <th th:text="#{app.email}">E-mail</th>
-                                <th>Telefone</th>
+                                <th th:text="#{app.phone}">Telefone</th>
                                 <th th:text="#{app.actions}">Ações</th>
                             </tr>
                         </thead>
@@ -32,12 +32,12 @@
                                 <td th:text="${cliente.telefone}"></td>
                                 <td>
                                     <a th:href="@{/admin/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-sm btn-primary" th:text="#{app.edit}">Editar</a>
-                                    <a th:href="@{/admin/clientes/excluir/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                                    <a th:href="@{/admin/clientes/excluir/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" th:data-confirm="#{app.confirm.delete}" onclick="return confirm(this.getAttribute('data-confirm'));">Excluir</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div th:if="${#lists.isEmpty(clientes)}" class="alert alert-warning">Nenhum cliente cadastrado.</div>
+                    <div th:if="${#lists.isEmpty(clientes)}" class="alert alert-warning" th:text="#{app.empty.clients}"></div>
                 </div>
             </div>
         </div>

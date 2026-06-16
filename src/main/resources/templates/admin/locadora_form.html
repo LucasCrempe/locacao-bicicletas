@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout :: head(titulo='Formulário Locadora')}"></head>
+<head th:replace="~{layout :: head(titulo=#{app.form.locadora})}"></head>
 <body>
     <div class="d-flex flex-row">
         <div th:replace="~{layout :: sidebar}"></div>
@@ -10,40 +10,40 @@
             <div class="container mt-4" style="max-width: 600px;">
                 <div class="card shadow-sm">
                     <div class="card-header bg-success text-white">
-                        <h4 class="mb-0" th:text="${locadora.id == null ? 'Cadastrar Locadora' : 'Editar Locadora'}"></h4>
+                        <h4 class="mb-0" th:text="${locadora.id == null} ? #{app.new.locadora} : #{app.edit}"></h4>
                     </div>
                     <div class="card-body">
                         <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
 
                         <form th:action="@{/admin/locadoras/salvar}" th:object="${locadora}" method="post">
-                            <input type="hidden" th:field="*{id}"> <!-- Essencial para o UPDATE -->
+                            <input type="hidden" th:field="*{id}">
                             <div class="mb-3">
-                                <label class="form-label">Nome da Locadora</label>
+                                <label class="form-label" th:text="#{app.name}"></label>
                                 <input type="text" th:field="*{nome}" class="form-control" required>
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <label class="form-label">E-mail</label>
+                                    <label class="form-label" th:text="#{app.email}"></label>
                                     <input type="email" th:field="*{email}" class="form-control" required>
                                 </div>
                                 <div class="col">
-                                    <label class="form-label">Senha (Digite novamente se for editar)</label>
+                                    <label class="form-label" th:text="#{app.password}"></label>
                                     <input type="password" th:field="*{senha}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col">
-                                    <label class="form-label">CNPJ (Ex: 11.111.111/1111-11)</label>
+                                    <label class="form-label" th:text="#{app.cnpj}"></label>
                                     <input type="text" th:field="*{cnpj}" class="form-control" required>
                                 </div>
                                 <div class="col">
-                                    <label class="form-label">Cidade</label>
+                                    <label class="form-label" th:text="#{app.city}"></label>
                                     <input type="text" th:field="*{cidade}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a th:href="@{/admin/locadoras}" class="btn btn-secondary me-2" th:text="#{app.cancel}">Cancelar</a>
-                                <button type="submit" class="btn btn-success" th:text="#{app.save}">Salvar</button>
+                                <a th:href="@{/admin/locadoras}" class="btn btn-secondary me-2" th:text="#{app.cancel}"></a>
+                                <button type="submit" class="btn btn-success" th:text="#{app.save}"></button>
                             </div>
                         </form>
                     </div>

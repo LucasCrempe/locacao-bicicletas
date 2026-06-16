@@ -7,10 +7,10 @@
         <div class="w-100 d-flex flex-column">
             <div th:replace="~{layout :: header}"></div>
             <div class="container mt-4">
-                <h2>Buscar Locadoras</h2>
+                <h2 th:text="#{app.menu.public}">Buscar Locadoras</h2>
                 <form th:action="@{/}" method="get" class="d-flex mb-4" style="max-width: 400px;">
-                    <input type="text" name="cidade" class="form-control me-2" placeholder="Digite a Cidade">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <input type="text" name="cidade" class="form-control me-2" th:placeholder="#{app.search.city}">
+                    <button type="submit" class="btn btn-primary" th:text="#{app.search}">Buscar</button>
                 </form>
                 
                 <div class="table-responsive">
@@ -28,7 +28,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div th:if="${#lists.isEmpty(locadoras)}" class="alert alert-secondary">Nenhuma locadora encontrada.</div>
+                    <div th:if="${#lists.isEmpty(locadoras)}" class="alert alert-secondary" th:text="#{app.empty.locadoras}"></div>
                 </div>
             </div>
         </div>

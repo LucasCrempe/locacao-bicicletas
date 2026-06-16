@@ -15,22 +15,19 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a th:href="@{/}" class="nav-link text-white">Buscar Locadoras (Público)</a>
-            </li>
-            
-            <li sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/clientes}" class="nav-link text-white">Gerenciar Clientes</a>
+                <a th:href="@{/}" class="nav-link text-white" th:text="#{app.menu.public}"></a>
             </li>
             <li sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/locadoras}" class="nav-link text-white">Gerenciar Locadoras</a>
+                <a th:href="@{/admin/clientes}" class="nav-link text-white" th:text="#{app.menu.manage_clients}"></a>
             </li>
-            
+            <li sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin/locadoras}" class="nav-link text-white" th:text="#{app.menu.manage_locadoras}"></a>
+            </li>
             <li sec:authorize="hasRole('CLIENTE')">
-                <a th:href="@{/cliente/locacoes}" class="nav-link text-white">Minhas Locações</a>
+                <a th:href="@{/cliente/locacoes}" class="nav-link text-white" th:text="#{app.menu.my_rentals}"></a>
             </li>
-            
             <li sec:authorize="hasRole('LOCADORA')">
-                <a th:href="@{/locadora/locacoes}" class="nav-link text-white">Locações Recebidas</a>
+                <a th:href="@{/locadora/locacoes}" class="nav-link text-white" th:text="#{app.menu.received_rentals}"></a>
             </li>
         </ul>
     </div>

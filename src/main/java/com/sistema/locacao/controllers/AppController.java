@@ -16,7 +16,7 @@ public class AppController {
     @GetMapping("/")
     public String index(Model model, @RequestParam(required = false) String cidade) {
         if (cidade != null && !cidade.isEmpty()) {
-            model.addAttribute("locadoras", locadoraRepository.findByCidadeIgnoreCase(cidade));
+            model.addAttribute("locadoras", locadoraRepository.findByCidadeContainingIgnoreCase(cidade));
         } else {
             model.addAttribute("locadoras", locadoraRepository.findAll());
         }
