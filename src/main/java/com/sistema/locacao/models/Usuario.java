@@ -1,5 +1,6 @@
 package com.sistema.locacao.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -18,6 +19,7 @@ public class Usuario {
 
     @NotBlank
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
     @Column(nullable = false)
