@@ -29,7 +29,7 @@ public class WebSecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/css/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/js/**")).permitAll()
                 
-                // LIBERAÇÃO DOS ENDPOINTS DA API REST (T7)
+                
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/clientes")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/clientes/**")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/locadoras")).permitAll()
@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/locacoes")).permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/locacoes/**")).permitAll()
                 
-                // Rotas MVC seguras
+                
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/cliente/**")).hasRole("CLIENTE")
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/locadora/**")).hasRole("LOCADORA")

@@ -6,11 +6,13 @@ import com.sistema.locacao.repositories.ClienteRepository;
 import com.sistema.locacao.repositories.LocadoraRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,7 +26,6 @@ public class AdminController {
 
     @Autowired
     private PasswordEncoder encoder;
-
 
     @GetMapping("/clientes")
     public String listarClientes(Model model) {
@@ -49,7 +50,6 @@ public class AdminController {
 
     @PostMapping("/clientes/salvar")
     public String salvarCliente(@Valid @ModelAttribute Cliente cliente, BindingResult result, Model model) {
-        // Agora verificamos exatamente ONDE está o erro e mandamos para a tela
         if (result.hasErrors()) {
             if (result.hasFieldErrors("cpf")) {
                 model.addAttribute("erro", "Validação falhou: O CPF digitado é INVÁLIDO. Utilize um CPF real.");
@@ -75,8 +75,13 @@ public class AdminController {
     }
 
     @GetMapping("/clientes/excluir/{id}")
-    public String excluirCliente(@PathVariable("id") Long id) {
-        clienteRepository.deleteById(id);
+    public String excluirCliente(@PathVariable("id") Long id, RedirectAttributes attr) {
+        try {
+            clienteRepository.deleteById(id);
+            attr.addFlashAttribute("sucessoExclusao", true);
+        } catch (DataIntegrityViolationException e) {
+            attr.addFlashAttribute("erroExclusao", true);
+        }
         return "redirect:/admin/clientes";
     }
 
@@ -126,8 +131,13 @@ public class AdminController {
     }
 
     @GetMapping("/locadoras/excluir/{id}")
-    public String excluirLocadora(@PathVariable("id") Long id) {
-        locadoraRepository.deleteById(id);
+    public String excluirLocadora(@PathVariable("id") Long id, RedirectAttributes attr) {
+        try {
+            locadoraRepository.deleteById(id);
+            attr.addFlashAttribute("sucessoExclusao", true);
+        } catch (DataIntegrityViolationException e) {
+            attr.addFlashAttribute("erroExclusao", true);
+        }
         return "redirect:/admin/locadoras";
     }
 }

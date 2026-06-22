@@ -9,19 +9,22 @@
             
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2 th:text="#{app.locadoras}">Locadoras</h2>
-                    <a th:href="@{/admin/locadoras/nova}" class="btn btn-success" th:text="#{app.new.locadora}">+ Nova Locadora</a>
+                    <h2 th:text="#{app.locadoras}"></h2>
+                    <a th:href="@{/admin/locadoras/nova}" class="btn btn-success" th:text="#{app.new.locadora}"></a>
                 </div>
+
+                <div th:if="${erroExclusao}" class="alert alert-danger" th:text="#{app.error.delete.locadora}"></div>
+                <div th:if="${sucessoExclusao}" class="alert alert-success" th:text="#{app.success.delete.locadora}"></div>
                 
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(locadoras)}">
                         <thead class="table-dark">
                             <tr>
-                                <th th:text="#{app.name}">Nome</th>
-                                <th th:text="#{app.cnpj}">CNPJ</th>
-                                <th th:text="#{app.email}">E-mail</th>
-                                <th th:text="#{app.city}">Cidade</th>
-                                <th th:text="#{app.actions}">Ações</th>
+                                <th th:text="#{app.name}"></th>
+                                <th th:text="#{app.cnpj}"></th>
+                                <th th:text="#{app.email}"></th>
+                                <th th:text="#{app.city}"></th>
+                                <th th:text="#{app.actions}"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,8 +34,8 @@
                                 <td th:text="${locadora.email}"></td>
                                 <td th:text="${locadora.cidade}"></td>
                                 <td>
-                                    <a th:href="@{/admin/locadoras/editar/{id}(id=${locadora.id})}" class="btn btn-sm btn-primary" th:text="#{app.edit}">Editar</a>
-                                    <a th:href="@{/admin/locadoras/excluir/{id}(id=${locadora.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" th:data-confirm="#{app.confirm.delete}" onclick="return confirm(this.getAttribute('data-confirm'));">Excluir</a>
+                                    <a th:href="@{/admin/locadoras/editar/{id}(id=${locadora.id})}" class="btn btn-sm btn-primary" th:text="#{app.edit}"></a>
+                                    <a th:href="@{/admin/locadoras/excluir/{id}(id=${locadora.id})}" class="btn btn-sm btn-danger" th:text="#{app.delete}" th:data-confirm="#{app.confirm.delete}" onclick="return confirm(this.getAttribute('data-confirm'));"></a>
                                 </td>
                             </tr>
                         </tbody>
