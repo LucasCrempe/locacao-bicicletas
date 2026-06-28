@@ -3,6 +3,8 @@ package com.sistema.locacao.controllers.rest;
 import com.sistema.locacao.models.Locadora;
 import com.sistema.locacao.repositories.LocadoraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +52,7 @@ public class LocadoraRestController {
             locadora.setCnpj(locadoraDetails.getCnpj());
             locadora.setCidade(locadoraDetails.getCidade());
             locadora.setEmail(locadoraDetails.getEmail());
+            
             if (locadoraDetails.getSenha() != null && !locadoraDetails.getSenha().isEmpty()) {
                 locadora.setSenha(encoder.encode(locadoraDetails.getSenha()));
             }
@@ -59,10 +62,14 @@ public class LocadoraRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (repository.existsById(id)) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        try {
             repository.deleteById(id);
             return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.notFound().build();
     }
 }

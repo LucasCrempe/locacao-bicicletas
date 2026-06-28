@@ -3,6 +3,8 @@ package com.sistema.locacao.controllers.rest;
 import com.sistema.locacao.models.Cliente;
 import com.sistema.locacao.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +49,7 @@ public class ClienteRestController {
             cliente.setSexo(clienteDetails.getSexo());
             cliente.setDataNascimento(clienteDetails.getDataNascimento());
             cliente.setEmail(clienteDetails.getEmail());
+            
             if (clienteDetails.getSenha() != null && !clienteDetails.getSenha().isEmpty()) {
                 cliente.setSenha(encoder.encode(clienteDetails.getSenha()));
             }
@@ -56,10 +59,14 @@ public class ClienteRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (repository.existsById(id)) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        try {
             repository.deleteById(id);
             return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.notFound().build();
     }
 }
