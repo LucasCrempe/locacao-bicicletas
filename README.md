@@ -1,7 +1,5 @@
 # Sistema de Locação de Bicicletas (API e MVC)
 
-Projeto referente às Atividades T6 e T7. Funciona como o servidor principal da aplicação, fornecendo tanto as telas para o usuário final quanto a API REST para consumo externo.
-
 ## Funcionalidades e Requisitos
 - **MVC:** Telas renderizadas via Thymeleaf, CRUD completo de Clientes e Locadoras com controle de acesso (Spring Security) e validações robustas (Bean Validation). Tratamento de exceções para integridade relacional. Internacionalização (PT/EN).
 - **REST API:** Endpoints públicos (`/clientes`, `/locadoras`, `/locacoes`) que retornam dados em JSON. Configuração via Jackson para não expor as senhas dos usuários nas requisições GET.
