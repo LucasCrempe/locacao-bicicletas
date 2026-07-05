@@ -18,12 +18,12 @@ mvn clean spring-boot:run
 O sistema rodará na porta 8080.
 
 **Acesso ao Banco H2:**
-URL: http://localhost:8080/h2-console
-JDBC URL: jdbc:h2:mem:locacaodb
-Usuário: sa
-Senha: (deixar em branco)
+- URL: http://localhost:8080/h2-console
+- JDBC URL: jdbc:h2:mem:locacaodb
+- Usuário: sa
+- Senha: (deixar em branco)
 
 **Admin:**
-Usuário Administrador (Gerado na inicialização):
-Login: admin@admin.com
-Senha: admin
+- Usuário Administrador (Gerado na inicialização):
+- Login: admin@admin.com
+- Senha: admin
